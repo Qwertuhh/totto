@@ -2,18 +2,17 @@
 
 An App used to assign tasks to our teamates, developed by *qwertuhh* during journey.
 
->  **Use Of AI** to give helpful Notes to whom ticket assigned
+> **Use Of AI** to give helpful Notes to whom ticket assigned
 
 ## What I had learnt
 
 - Monorepo
-- build own module the *post-imports*
+- build own module the *[post-imports](https://github.com/Qwertuhh/post-imports)*
 - logging
 - Guildlines of logging
 - LGTM Stack
 - Inngest
 - Mailling
-
 
 ## Acknowledgements
 
