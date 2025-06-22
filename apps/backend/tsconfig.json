@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "nodenext",
+    "outDir": "dist",
+    "rootDirs": ["src", "../../shared"],
+    "strict": true,
+    "esModuleInterop": true,
+    "moduleResolution": "nodenext",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "incremental": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@shared/*": ["../../shared/*"]
+    }
+  },
+  "typeRoots": [
+    "../../node_modules/@types",
+    "../../shared/node_modules/@types",
+    "../../shared/types"
+  ],
+  "include": ["src/**/*", "../../shared/**/*", "post-imports.d.ts"],
+  "exclude": ["dist", "build", "node_modules"]
+}
