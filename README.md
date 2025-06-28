@@ -10,7 +10,7 @@ An App used to assign tasks to our teamates, developed by *qwertuhh* during jour
 - build own module the *[post-imports](https://github.com/Qwertuhh/post-imports)*
 - logging
 - Guildlines of logging
-- LGTM Stack
+- LG~~T~~M Stack
 - Inngest
 - Mailling
 
