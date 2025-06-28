@@ -54,7 +54,7 @@ services:
     image: grafana/promtail:3.2.1
     volumes:
       - ./config/promtail.yaml:/etc/promtail/config.yaml
-      - ./logs:/var/log/backend  
+      - ./logs:/var/logs/backend  
     command: -config.file=/etc/promtail/config.yaml
     depends_on:
       - loki

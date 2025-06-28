@@ -121,6 +121,15 @@ function productionLogger(metadata: TMetadata) {
         timeout: 4000,
         format: jsonFormat(metadata),
       }),
+      new winston.transports.File({
+        filename: "../../logs/error.log",
+        level: "error",
+        format: jsonFormat(metadata),
+      }),
+      new winston.transports.File({
+        filename: "../../logs/combined.log",
+        format: jsonFormat(metadata),
+      }),
       new winston.transports.Console(),
     ],
   });
