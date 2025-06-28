@@ -4,6 +4,10 @@ An App used to assign tasks to our teamates, developed by *qwertuhh* during jour
 
 > **Use Of AI** to give helpful Notes to whom ticket assigned
 
+>  [!NOTE]
+>
+> This app may contains some error may motive of this app **to learn dockers (containerization) and logging.**
+
 ## What I had learnt
 
 - Monorepo
