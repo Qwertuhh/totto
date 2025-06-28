@@ -1,22 +1,55 @@
-import * as fs from "fs";
+import fs from "fs";
+import fse from "fs-extra";
+import path from "path";
 import { execSync } from "child_process";
-import postImports from "post-imports"; 
 
+// Define paths
+const rootDir = path.resolve(__dirname, "..");
+const distDir = path.join(rootDir, "dist");
+const backendSrcDir = path.join(distDir, "apps/backend/src");
+const appsDir = path.join(distDir, "apps");
+
+// Build command
 const BUILD_DIST = "tsc -p tsconfig.json && tsc-alias";
-const COPY_SRC_DIR =
-'powershell -Command "cp -r dist/apps/backend/src/* dist/"';
-const DELETE_APPS_DIR =
-'powershell -Command "Remove-Item -Recurse -Force dist/apps/"';
 
-if (!fs.existsSync("dist")) {
-  execSync(`${BUILD_DIST} && ${COPY_SRC_DIR} && ${DELETE_APPS_DIR}`, {
-    stdio: "inherit",
-  });
+// Helper to run shell commands safely
+function runCommand(command: string) {
+  try {
+    console.log(`Executing: ${command}`);
+    execSync(command, { stdio: "inherit" });
+    console.log(`Successfully executed: ${command}`);
+  } catch (err) {
+    console.error(`Failed to execute: ${command}`);
+    process.exit(1);
+  }
 }
 
-//? Dist exists, and apps folder also exists
-if (fs.existsSync("dist/apps")) {
-  execSync(DELETE_APPS_DIR, { stdio: "inherit" });
+// Step 2: Build
+runCommand(BUILD_DIST);
+
+// Step 3: Ensure dist exists
+if (!fs.existsSync(distDir)) {
+  fs.mkdirSync(distDir, { recursive: true });
+  console.log(`Created dist directory: ${distDir}`);
 }
 
-postImports();
+// Step 4: Copy backend source files to dist/
+if (fs.existsSync(backendSrcDir)) {
+  const targetDir = distDir;
+  console.log(
+    `Copying backend source files from ${backendSrcDir} to ${targetDir}`
+  );
+  fse.copySync(backendSrcDir, targetDir, { overwrite: true });
+}
+
+// Step 5: Remove dist/apps directory
+if (fs.existsSync(appsDir)) {
+  console.log(`Removing apps directory: ${appsDir}`);
+  fse.removeSync(appsDir);
+}
+
+// Step 6: Run post-imports
+console.log("Running postImports...");
+console.log("postImports completed.");
+
+console.log("✅ Build completed successfully!");

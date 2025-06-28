@@ -1,0 +1,64 @@
+services:
+  backend:
+    build:
+      context: ./apps/backend
+    ports:
+      - "4110:4110"
+    depends_on:
+      - loki
+    env_file:
+      - env/.env
+      - env/backend/.env
+
+  frontend:
+    build:
+      context: ./apps/frontend
+    ports:
+      - "4173:4173"
+    depends_on:
+      - backend
+    env_file:
+      - env/.env
+
+  loki:
+    image: grafana/loki:3.4.1
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./config/loki.yaml:/etc/loki/loki-config.yaml
+      - loki-data:/loki
+    command: -config.file=/etc/loki/loki-config.yaml
+
+  prometheus:
+    image: prom/prometheus:v3.4.1
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./config/prometheus.yaml:/etc/prometheus/prometheus.yaml
+      - prometheus-data:/prometheus
+    command: --config.file=/etc/prometheus/prometheus.yaml
+
+  grafana:
+    image: grafana/grafana-oss:12.0.2
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./config/grafana:/etc/grafana
+      - grafana-data:/var/lib/grafana
+    environment:
+      - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+
+  promtail:
+    image: grafana/promtail:3.2.1
+    volumes:
+      - ./config/promtail.yaml:/etc/promtail/config.yaml
+      - ./logs:/var/log/backend  
+    command: -config.file=/etc/promtail/config.yaml
+    depends_on:
+      - loki
+volumes:
+  loki-data:
+  prometheus-data:
+  grafana-data:

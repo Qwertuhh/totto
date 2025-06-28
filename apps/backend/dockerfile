@@ -1,0 +1,11 @@
+FROM node:24-alpine3.21
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY dist .
+
+EXPOSE 4110
+CMD ["node", "/app/apps/backend/src/index.js"]

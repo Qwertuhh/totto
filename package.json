@@ -5,17 +5,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "concurrently \"npm:delete:dist\" \"npm:build:frontend\" \"npm:build:backend\" \"npm:copy:dist\"",
-    "build:frontend": "cd apps/frontend && npm run build",
-    "build:backend": "cd apps/backend && npm run build",
-    "copy:dist": "powershell -Command \"Copy-Item -Path apps/frontend/dist -Destination dist/frontend -Recurse; Copy-Item -Path apps/backend/dist -Destination dist/backend -Recurse\"",
-    "delete:dist": "powershell -Command \"Remove-Item -Recurse -Force dist/\"",
-    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
-    "dev:backend": "cd apps/backend && npm run build && npm run dev",
-    "dev:frontend": "cd apps/frontend && npm run dev",
-    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
-    "start:backend": "cd apps/backend && npm run build && npm run start:prod",
-    "start:frontend": "cd apps/frontend && npm run preview"
+    "build": "tsx scripts/build.ts",
+    "dev": "tsx scripts/dev.js",
+    "start": "tsx scripts/start.js",
+    "config": "tsx config/IPConfig.ts"
   },
   "keywords": [],
   "author": "",
@@ -26,14 +19,19 @@
     "concurrently": "^9.2.0",
     "cross-env": "^7.0.3",
     "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.16",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.20.3",
     "typescript": "^5.8.3"
   },
   "dependencies": {
     "dotenv": "^16.5.0",
+    "fs-extra": "^11.3.0",
     "heroui-cli": "^1.2.3",
     "mongoose": "^8.16.0",
-    "winston": "^3.17.0"
+    "prom-client": "^15.1.3",
+    "winston": "^3.17.0",
+    "winston-loki": "^6.1.3"
   }
 }

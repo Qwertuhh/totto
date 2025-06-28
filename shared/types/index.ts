@@ -1,4 +1,6 @@
 import mongoose, { Document } from "mongoose";
+import winston from "winston";
+
 interface IUser extends Document {
   _id: string;
   name: string;
@@ -25,4 +27,10 @@ interface ITicket extends Document {
   updatedAt?: Date;
 }
 
-export type { IUser, ITicket };
+
+interface Metadata extends  winston.Logform.MetadataOptions  {
+  environment?: string;
+  service: string;
+}
+
+export type { IUser, ITicket, Metadata };
