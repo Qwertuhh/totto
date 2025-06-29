@@ -4,9 +4,12 @@ An App used to assign tasks to our teamates, developed by *qwertuhh* during jour
 
 > **Use Of AI** to give helpful Notes to whom ticket assigned
 
->  [!NOTE]
+> [!NOTE]
 >
 > This app may contains some error may motive of this app **to learn dockers (containerization) and logging.**
+>
+>>  Even It contains one error to resolve run locally and inspect and fix that error.🔨
+>>
 
 ## What I had learnt
 
