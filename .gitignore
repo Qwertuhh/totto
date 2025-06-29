@@ -26,5 +26,6 @@ dist-ssr
 
 /.inngest
 /env/.env
+/env/backend/.env
 
 tsconfig.tsbuildinfo
